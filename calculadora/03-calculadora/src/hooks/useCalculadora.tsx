@@ -9,12 +9,14 @@ export const useCalculadora = () => {
     const [numero, setNumero] = useState('0');
     const [numeroPequeno, setNumeroPequeno] = useState('0');
 
-    const ultimaOperacion = useRef<Operadores>()
+    const ultimaOperacion = useRef<Operadores>();
+    const ultimoResultado = useRef(0);
 
 
     const limpiar = () => {
         setNumero('0');
         setNumeroPequeno('0');
+        ultimoResultado.current = 0;
     }
 
     const armarNumero = (numeroTexto: string) => {
@@ -41,7 +43,7 @@ export const useCalculadora = () => {
         } else {
             setNumero(numero + numeroTexto);
         }
-        
+
     };
 
     const positivoNegatigo = () => {
@@ -57,19 +59,29 @@ export const useCalculadora = () => {
         setNumero(newNum === '' || newNum === '-' ? '0' : newNum);
     };
 
-    const cambiarNumeroPorAnterior = () => {
+    const cambiarNumeroPorAnterior = (operador: string) => {
+        let historico = '';
         if (numero.endsWith('.')) {
-            setNumeroPequeno(numero.slice(0, -1));
+            historico = (numeroPequeno != '0')
+                ? numeroPequeno + numero.slice(0, -1) + operador
+                : numero.slice(0, -1) + operador;
+            console.log(historico);
+
+            setNumeroPequeno(historico);
         } else {
-            setNumeroPequeno(numero);
+            historico = (numeroPequeno != '0')
+                ? numeroPequeno + numero + operador
+                : numero + operador;
+            console.log(historico);
+
+            setNumeroPequeno(historico);
         }
         setNumero('0');
     }
 
     const btnOperaciones = (operador: string) => {
-        console.log(operador);
 
-        cambiarNumeroPorAnterior()
+        cambiarNumeroPorAnterior(operador)
 
         switch (operador) {
             case '/':
@@ -85,17 +97,28 @@ export const useCalculadora = () => {
                 ultimaOperacion.current = (Operadores.sumar)
                 break;
         }
+        if (ultimoResultado.current != 0) {
+            console.log('distinto a 0 ' + ultimoResultado.current);
+            calcular();
+        }
+        else {
+            ultimoResultado.current = Number(numero);
+            console.log(ultimoResultado.current);
+        }
 
     }
 
     const calcular = () => {
 
         const num1 = Number(numero);
-        const num2 = Number(numeroPequeno);
+        const num2 = Number(ultimoResultado.current);
+        let result = 0;
+        console.log('num1 ' + num1 + '   num2 ' + num2);
+
 
         switch (ultimaOperacion.current) {
             case Operadores.dividir:
-                let result = num2 / num1;
+                result = num2 / num1;
                 if (!isFinite(result)) {
                     setNumero('división no valida')
                 } else {
@@ -103,19 +126,25 @@ export const useCalculadora = () => {
                 }
                 break;
             case Operadores.multiplicar:
-                setNumero(`${num1 * num2}`);
+                result = num1 * num2;
+                setNumero(`${result}`);
                 break;
             case Operadores.sumar:
-                setNumero(`${num1 + num2}`);
+                result = num1 + num2;
+                setNumero(`${result}`);
                 break;
             case Operadores.restar:
-                setNumero(`${num2 - num1}`);
+                result = num2 - num1;
+                setNumero(`${result}`);
                 break;
 
             default:
                 break;
         }
-        setNumeroPequeno('0');
+        ultimoResultado.current = result;
+        console.log('Ultimo Resultado calcular ' + ultimoResultado.current);
+
+        //setNumeroPequeno('0');
     }
 
     return {

@@ -1,8 +1,8 @@
 import React from 'react'
 import { Text, View } from 'react-native'
 import { BotonCalc } from '../components/BotonCalc'
+import { useCalculadora } from '../hooks/useCalculadora'
 import { styles } from '../theme/appTheme'
-import { useCalculadora } from '../hooks/useCalculadora';
 
 export const Calculadora = () => {
 
@@ -17,11 +17,11 @@ export const Calculadora = () => {
 
     return (
         <View style={styles.calculadoraContainer}>
-            {
-                (numeroPequeno !== '0')
-                && (<Text style={styles.resultadoPequeno}>{numeroPequeno}</Text>)
-            }
-
+                {/* {
+                    (numeroPequeno !== '0')
+                    && (<Text style={styles.resultadoPequeno}>{numeroPequeno}</Text>)
+                } */}
+            <Text style={styles.resultadoPequeno}>{numeroPequeno}</Text>
             <Text style={styles.resultado}
                 numberOfLines={1}
                 adjustsFontSizeToFit
