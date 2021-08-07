@@ -1,9 +1,10 @@
 import 'react-native-gesture-handler';
 import React from 'react';
-
-import { Navigator } from './src/navigator/Navigator';
+import { NavigationContainer } from '@react-navigation/native';
+// import { Navigator } from './src/navigator/Navigator';
 
 import { ThemeProvider } from './src/contexts/theme/ThemeContexts';
+import { DrawerNavigator } from './src/navigator/DrawerNavigator';
 
 /*const customTheme: Theme = {
   dark: true,
@@ -21,7 +22,8 @@ import { ThemeProvider } from './src/contexts/theme/ThemeContexts';
 const App = () => {
   return (
     <AppStateTheme>
-      <Navigator />
+      {/* <Navigator /> */}
+      <DrawerNavigator />
     </AppStateTheme>
   )
 }
