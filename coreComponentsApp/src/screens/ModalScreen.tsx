@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Text, View, StyleSheet, Button, Modal } from 'react-native'
 import { HeaderComponent } from '../components/HeaderComponent'
-import { styles } from '../theme/appTheme'
+import { styles } from '../themes/appTheme'
 
 export const ModalScreen = () => {
 

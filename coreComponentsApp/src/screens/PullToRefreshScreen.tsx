@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Text, View, StyleSheet, ScrollView, RefreshControl } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { HeaderComponent } from '../components/HeaderComponent'
-import { styles } from '../theme/appTheme'
+import { styles } from '../themes/appTheme'
 
 export const PullToRefreshScreen = () => {
 

@@ -5,7 +5,7 @@ import { ThemeContext } from '../contexts/theme/ThemeContexts';
 
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
-import { MenuItem } from '../Interfaces/interfaces';
+import { MenuItem } from '../interfaces/interfaces';
 
 interface Props {
     menuItem: MenuItem

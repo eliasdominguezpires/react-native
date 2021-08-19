@@ -4,7 +4,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { ThemeContext } from '../contexts/theme/ThemeContexts';
 
-import { styles } from '../theme/appTheme'
+import { styles } from '../themes/appTheme'
 
 
 interface Props {

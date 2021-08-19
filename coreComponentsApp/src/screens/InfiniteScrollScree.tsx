@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Text, View, StyleSheet, FlatList, Image, ActivityIndicator } from 'react-native';
 import { FadeInImage } from '../components/FadeInImage';
 import { HeaderComponent } from '../components/HeaderComponent';
-import { styles as stylesGlobal } from '../theme/appTheme';
+import { styles as stylesGlobal } from '../themes/appTheme';
 
 export const InfiniteScrollScree = () => {
 

@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native'
 import { HeaderComponent } from '../components/HeaderComponent';
-import { styles } from '../theme/appTheme';
+import { styles } from '../themes/appTheme';
 import { ThemeContext } from '../contexts/theme/ThemeContexts';
 
 export const ThemeScreen = () => {

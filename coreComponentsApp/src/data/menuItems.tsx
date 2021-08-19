@@ -1,4 +1,4 @@
-import { MenuItem } from '../Interfaces/interfaces';
+import { MenuItem } from '../interfaces/interfaces';
 export const menuItems: MenuItem[] = [
     {
         name: 'Animaciones 101',
@@ -54,5 +54,10 @@ export const menuItems: MenuItem[] = [
         name: 'Theme',
         icon: 'flask-outline',
         compoonent: 'ThemeScreen'
+    },
+    {
+        name: 'Logout',
+        icon: 'exit-outline',
+        compoonent: 'ProtectedScreen'
     }
 ]
