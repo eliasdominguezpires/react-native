@@ -3,9 +3,9 @@ import { View, Button, Alert } from 'react-native';
 
 import prompt from 'react-native-prompt-android';
 
-import { HeaderComponent } from '../components/HeaderComponent'
-import { styles } from '../themes/appTheme';
-import { CustomAlert } from '../components/CustomAlert';
+import { HeaderComponent } from '../../components/HeaderComponent'
+import { styles } from '../../themes/appTheme';
+import { CustomAlert } from '../../components/CustomAlert';
 
 
 

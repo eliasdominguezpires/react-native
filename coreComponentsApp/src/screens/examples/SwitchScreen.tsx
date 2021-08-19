@@ -1,8 +1,8 @@
 import React, { useContext, useState } from 'react'
 import { View, Switch, Platform, Text, StyleSheet } from 'react-native';
-import { CustomSwitch } from '../components/CustomSwitch';
-import { HeaderComponent } from '../components/HeaderComponent';
-import { ThemeContext } from '../contexts/theme/ThemeContexts';
+import { CustomSwitch } from '../../components/CustomSwitch';
+import { HeaderComponent } from '../../components/HeaderComponent';
+import { ThemeContext } from '../../contexts/theme/ThemeContexts';
 
 export const SwitchScreen = () => {
 

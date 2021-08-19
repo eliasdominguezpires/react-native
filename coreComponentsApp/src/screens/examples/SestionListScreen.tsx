@@ -1,9 +1,9 @@
 import React, { useContext } from 'react'
 import { Text, View, StyleSheet, SectionList } from 'react-native'
-import { HeaderComponent } from '../components/HeaderComponent'
-import { styles } from '../themes/appTheme';
-import { ItemSeparetor } from '../components/ItemSeparetor';
-import { ThemeContext } from '../contexts/theme/ThemeContexts';
+import { HeaderComponent } from '../../components/HeaderComponent'
+import { styles } from '../../themes/appTheme';
+import { ItemSeparetor } from '../../components/ItemSeparetor';
+import { ThemeContext } from '../../contexts/theme/ThemeContexts';
 
 interface Casas {
     casa: string;

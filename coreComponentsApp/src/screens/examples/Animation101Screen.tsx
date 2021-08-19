@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, StyleSheet, Animated, Button } from 'react-native';
-import { useAnimation } from '../hooks/useAnimation';
+import { useAnimation } from '../../hooks/useAnimation';
 
 export const Animation101Screen = () => {
 

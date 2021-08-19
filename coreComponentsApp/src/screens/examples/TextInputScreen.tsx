@@ -6,13 +6,13 @@ import {
     from 'react-native';
 
 import { ScrollView } from 'react-native-gesture-handler';
-import { CustomSwitch } from '../components/CustomSwitch';
-import { HeaderComponent } from '../components/HeaderComponent';
+import { CustomSwitch } from '../../components/CustomSwitch';
+import { HeaderComponent } from '../../components/HeaderComponent';
 
-import { styles } from '../themes/appTheme';
-import { useForm } from '../hooks/useForm';
+import { styles } from '../../themes/appTheme';
+import { useForm } from '../../hooks/useForm';
 // import useReducer from 'react';
-import { ThemeContext } from '../contexts/theme/ThemeContexts';
+import { ThemeContext } from '../../contexts/theme/ThemeContexts';
 
 export const TextInputScreen = () => {
 
