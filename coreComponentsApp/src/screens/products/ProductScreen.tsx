@@ -1,14 +1,15 @@
-import React, { useContext, useEffect } from 'react'
-import { Text, View, StyleSheet, Button, Image, Alert } from 'react-native';
+import React, { useContext, useEffect, useState } from 'react'
+import { Text, View, StyleSheet, Button, Image, Alert, ScrollView, TextInput } from 'react-native';
 
 import { StackScreenProps } from '@react-navigation/stack';
 import { ProductsStackParams } from '../../navigator/ProductsNavigator';
-import { ScrollView, TextInput } from 'react-native-gesture-handler';
 
 import { Picker } from '@react-native-picker/picker';
+import { launchCamera, launchImageLibrary, ImagePickerResponse } from 'react-native-image-picker';
+
+import { ProductsContext } from '../../contexts/products/ProductsContext';
 import { useCategories } from '../../hooks/useCategories';
 import { useForm } from '../../hooks/useForm';
-import { ProductsContext } from '../../contexts/products/ProductsContext';
 
 interface Props extends StackScreenProps<ProductsStackParams, 'ProductScreen'> { };
 
@@ -17,9 +18,8 @@ export const ProductScreen = ({ navigation, route }: Props) => {
     const { id = '', name = '' } = route.params;
 
     // const [selectedLanguage, setSelectedLanguage] = useState();
-    const { categories } = useCategories();
-
-    const { loadProductById, addProduct, updateProduct } = useContext(ProductsContext);
+    const { loadProductById, addProduct, updateProduct, uploadProductImage } = useContext(ProductsContext);
+    const [tempUri, setTempUri] = useState<string>();
 
     const { _id, categoriaId, nombre, img, form, onChange, setFormValue } = useForm({
         _id: id,
@@ -27,14 +27,13 @@ export const ProductScreen = ({ navigation, route }: Props) => {
         nombre: name,
         img: ''
     });
+    const { categories } = useCategories();
 
     useEffect(() => {
         navigation.setOptions({
             title: (nombre) ? nombre : 'New Product'
         })
     }, [nombre]);
-
-
     useEffect(() => {
         loadProduct();
     }, [])
@@ -65,6 +64,36 @@ export const ProductScreen = ({ navigation, route }: Props) => {
             onChange(newProduc._id, '_id')
         }
     }
+
+    const takePhoto = () => {
+        launchCamera({
+            mediaType: 'photo',
+            quality: 0.8
+        }, (resp) => {
+            if (resp.didCancel) return;
+            if (!resp.assets) return;
+
+            setTempUri(resp.assets?.[0].uri);
+
+            uploadProductImage(resp.assets[0], _id);
+        });
+    }
+
+    const takePhotoFromGallery = () => {
+        launchImageLibrary(
+            {
+                mediaType: 'photo',
+                quality: 0.8,
+            },
+            resp => {
+                if (resp.didCancel) return;
+                if (!resp.assets) return;
+
+                setTempUri(resp.assets?.[0].uri);
+                uploadProductImage(resp.assets[0], _id);
+            },
+        );
+    };
 
     return (
         <View style={styles.container}>
@@ -104,13 +133,13 @@ export const ProductScreen = ({ navigation, route }: Props) => {
                         <View style={styles.footer}>
                             <Button
                                 title="Camara"
-                                onPress={() => { }}
+                                onPress={() => { takePhoto(); }}
                                 color="#5856D6"
                             />
                             <View style={{ width: 10 }} />
                             <Button
                                 title="Galeria"
-                                onPress={() => { }}
+                                onPress={() => { takePhotoFromGallery(); }}
                                 color="#5856D6"
                             />
                         </View>
@@ -118,7 +147,7 @@ export const ProductScreen = ({ navigation, route }: Props) => {
                     )
                 }
                 {
-                    (img.length > 0) && (
+                    (img.length > 0 && !tempUri) && (
                         <Image
                             source={{ uri: img }}
                             style={{
@@ -130,7 +159,18 @@ export const ProductScreen = ({ navigation, route }: Props) => {
                     )
                 }
                 {/* Imagen Temporal */}
-
+                {
+                    (tempUri) && (
+                        <Image
+                            source={{ uri: tempUri }}
+                            style={{
+                                marginTop: 20,
+                                width: '100%',
+                                height: 300
+                            }}
+                        />
+                    )
+                }
                 <Text>{JSON.stringify(form, null, 5)}</Text>
             </ScrollView>
 
@@ -160,3 +200,7 @@ const styles = StyleSheet.create({
     },
     footer: { flexDirection: 'row', justifyContent: 'center', marginTop: 10 }
 });
+
+function useStatae<T>(arg0: string): [any, any] {
+    throw new Error('Function not implemented.');
+}

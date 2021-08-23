@@ -1,4 +1,6 @@
 import React, { createContext, useEffect, useState } from "react";
+import { ImagePickerResponse, Asset } from 'react-native-image-picker';
+
 import { Producto, ProductsResponse } from '../../interfaces/productsInterfaces';
 import baseApi from '../../apis/baseApi';
 
@@ -47,7 +49,7 @@ export const ProductsProvider = ({ children }: any) => {
             categoria: categoryId,
         });
         console.log(JSON.stringify(resp, null, 5));
-        
+
         setProducts(products.map(prod => {
             return (prod._id === productId)
                 ? resp.data
@@ -62,8 +64,24 @@ export const ProductsProvider = ({ children }: any) => {
         const resp = await baseApi.get<Producto>(`/productos/${id}`);
         return resp.data;
     };
-    const uploadProductImage = async (data: any, id: string) => {
+    const uploadProductImage = async (data: Asset, productId: string) => {
+        console.log("DATA" + data);
 
+        const fileToUpload = {
+            uri: data.uri,
+            type: data.type,
+            name: data.fileName,
+        };
+
+        const formData = new FormData();
+        formData.append('archivo', fileToUpload);
+
+        try {
+            const resp = await baseApi.put(`/uploads/productos/${productId}`, formData,);
+            console.log(resp);
+        } catch (error) {
+            console.log({ error });
+        }
     };
 
     return (
