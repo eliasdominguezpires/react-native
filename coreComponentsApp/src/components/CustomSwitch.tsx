@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { StyleSheet, Switch, Platform } from 'react-native';
+import { Switch, Platform } from 'react-native';
 
 interface Props {
     isOn: boolean;

@@ -59,5 +59,10 @@ export const menuItems: MenuItem[] = [
         name: 'Logout',
         icon: 'exit-outline',
         compoonent: 'ProtectedScreen'
+    },
+    {
+        name: 'Productos',
+        icon: 'exit-outline',
+        compoonent: 'ProductsNavigator'
     }
 ]

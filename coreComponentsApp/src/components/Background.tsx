@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, View, StyleSheet } from 'react-native'
+import { View } from 'react-native'
 
 export const Background = () => {
     return (

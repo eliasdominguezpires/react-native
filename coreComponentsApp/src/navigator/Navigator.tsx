@@ -10,6 +10,8 @@ import { AuthContext } from '../contexts/auth/AuthContexts';
 import { LoadingScreen } from '../screens/login/LoadingScreen';
 import { LoginScreen } from '../screens/login/LoginScreen';
 import { RegisterScreen } from '../screens/login/RegisterScreen';
+import { ProductsNavigator } from './ProductsNavigator';
+import { HomeScreens } from '../screens/HomeScreens';
 
 const Stack = createStackNavigator();
 
@@ -35,6 +37,8 @@ export const Navigator = () => {
                         ? (
                             <>
                                 <Stack.Screen name="DrawerNavigator" component={DrawerNavigator} />
+                                <Stack.Screen name="HomeScreen" component={HomeScreens} />
+
                                 {/* <Stack.Screen name="SlidesScreen" component={SlidesScreen} /> */}
                             </>
                         )

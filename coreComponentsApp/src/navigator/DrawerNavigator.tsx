@@ -25,6 +25,7 @@ import { InfiniteScrollScree } from '../screens/examples/InfiniteScrollScree';
 import { SlidesScreen } from '../components/SlidesScreen';
 import { ThemeScreen } from '../screens/ThemeScreen';
 import { ProtectedScreen } from '../screens/login/ProtectedScreen';
+import { ProductsNavigator } from './ProductsNavigator';
 
 const Drawer = createDrawerNavigator();
 
@@ -44,8 +45,9 @@ export const DrawerNavigator = () => {
                 width >= 758 ? 'permanent' : 'front'
             } //para configurar al drawer, mostrar siempre permanent
             drawerContent={(props) => <MenuInterno {...props} />}
-            // initialRouteName="Navigator"
+        // initialRouteName="Navigator"
         >
+            
             <Drawer.Screen name="HomeScreen" component={HomeScreens} />
             <Drawer.Screen name="Animation101Screen" component={Animation101Screen} />
             <Drawer.Screen name="Animation102Screen" component={Animation102Screen} />
@@ -58,7 +60,11 @@ export const DrawerNavigator = () => {
             <Drawer.Screen name="InfiniteScrollScree" component={InfiniteScrollScree} />
             <Drawer.Screen name="SlidesScreen" component={SlidesScreen} />
             <Drawer.Screen name="ThemeScreen" component={ThemeScreen} />
+            
             <Drawer.Screen name="ProtectedScreen" component={ProtectedScreen} />
+
+            <Drawer.Screen name="ProductsNavigator" component={ProductsNavigator} />
+
         </Drawer.Navigator>
     );
 }
@@ -90,10 +96,11 @@ const MenuInterno = (props: DrawerContentComponentProps<DrawerContentOptions>) =
             </View>
             {/* Opciones de Menu */}
             <View style={styles.menuContainer}>
-                <TouchableOpacity style={styles.menuBoton} onPress={() => props.navigation.navigate('ProtectedScreen')}>
+
+                <TouchableOpacity style={styles.menuBoton} onPress={() => props.navigation.navigate('HomeScreens')}>
                     <Icon name="airplane-outline" size={20} color="grey" />
 
-                    <Text style={{ ...styles.menuTexto, color: theme.colors.text }}> Nome</Text>
+                    <Text style={{ ...styles.menuTexto, color: theme.colors.text }}> Home</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.menuBoton} onPress={() => props.navigation.navigate('SlidesScreen')}>
                     <Icon name="airplane-outline" size={20} color="grey" />
@@ -106,7 +113,7 @@ const MenuInterno = (props: DrawerContentComponentProps<DrawerContentOptions>) =
                     title="logout"
                     color="#5856D6"
                     onPress={logoudClose}
-                    
+
                 />
             </View>
         </DrawerContentScrollView>
