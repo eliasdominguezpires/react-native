@@ -26,6 +26,9 @@ import { SlidesScreen } from '../components/SlidesScreen';
 import { ThemeScreen } from '../screens/ThemeScreen';
 import { ProtectedScreen } from '../screens/login/ProtectedScreen';
 import { ProductsNavigator } from './ProductsNavigator';
+import { MapScreen } from '../screens/maps/MapScreen';
+import { PermissionsScreen } from '../screens/maps/PermissionsScreen';
+import { PermissionsContext } from '../contexts/permissions/PermissionsContext';
 
 const Drawer = createDrawerNavigator();
 
@@ -34,6 +37,8 @@ export const DrawerNavigator = () => {
     const { width, height } = useWindowDimensions();
 
     const { status } = useContext(AuthContext);
+    const { permissions } = useContext(PermissionsContext);
+
 
     if (status === 'checkin') return <LoadingScreen />
 
@@ -47,7 +52,7 @@ export const DrawerNavigator = () => {
             drawerContent={(props) => <MenuInterno {...props} />}
         // initialRouteName="Navigator"
         >
-            
+
             <Drawer.Screen name="HomeScreen" component={HomeScreens} />
             <Drawer.Screen name="Animation101Screen" component={Animation101Screen} />
             <Drawer.Screen name="Animation102Screen" component={Animation102Screen} />
@@ -60,10 +65,29 @@ export const DrawerNavigator = () => {
             <Drawer.Screen name="InfiniteScrollScree" component={InfiniteScrollScree} />
             <Drawer.Screen name="SlidesScreen" component={SlidesScreen} />
             <Drawer.Screen name="ThemeScreen" component={ThemeScreen} />
-            
+
             <Drawer.Screen name="ProtectedScreen" component={ProtectedScreen} />
 
             <Drawer.Screen name="ProductsNavigator" component={ProductsNavigator} />
+
+            {
+                // esto es dependientemende de donde se quiera manejar el permiso
+                (permissions.locationStatus !== 'granted')
+                    ? (
+                        // si el permiso se maneja en el maps screen se debe de quitar esta condicion
+                        <>
+                            <Drawer.Screen name="MapScreen" component={MapScreen} />
+                            <Drawer.Screen name="PermissionsScreen" component={PermissionsScreen} />
+                        </>
+                    )
+                    : (
+                        <>
+                            <Drawer.Screen name="MapScreen" component={MapScreen} />
+                            <Drawer.Screen name="PermissionsScreen" component={PermissionsScreen} />
+                        </>
+                    )
+            }
+
 
         </Drawer.Navigator>
     );

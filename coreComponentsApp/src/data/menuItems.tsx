@@ -62,7 +62,17 @@ export const menuItems: MenuItem[] = [
     },
     {
         name: 'Productos',
-        icon: 'exit-outline',
+        icon: 'checkbox-outline',
         compoonent: 'ProductsNavigator'
+    },
+    {
+        name: 'Permisos',
+        icon: 'navigate-outline',
+        compoonent: 'PermissionsScreen'
+    },
+    {
+        name: 'Mapas',
+        icon: 'navigate-outline',
+        compoonent: 'MapScreen'
     }
 ]
